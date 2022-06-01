@@ -1,19 +1,470 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <title>WEB1 - JavaScript</title>
-  <meta charset="utf-8">
-</head>
-<body>
-  <h1><a href="index.html">WEB</a></h1>
-  <ol>
-    <li><a href="1.html">HTML</a></li>
-    <li><a href="2.html">CSS</a></li>
-    <li><a href="3.html">JavaScript</a></li>
-  </ol>
-  <h2>JavaScript</h2>
-  <p>
-    JavaScript (/ˈdʒɑːvəˌskrɪpt/[6]), often abbreviated as JS, is a high-level, dynamic, weakly typed, prototype-based, multi-paradigm, and interpreted programming language. Alongside HTML and CSS, JavaScript is one of the three core technologies of World Wide Web content production. It is used to make webpages interactive and provide online programs, including video games. The majority of websites employ it, and all modern web browsers support it without the need for plug-ins by means of a built-in JavaScript engine. Each of the many JavaScript engines represent a different implementation of JavaScript, all based on the ECMAScript specification, with some engines not supporting the spec fully, and with many engines supporting additional features beyond ECMA.
-  </p>
-</body>
+  <head>
+    <title>WEB1 - JavaScript</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h1><a href="index.html">WEB</a></h1>
+    <ol>
+      <li><a href="1.html">HTML</a></li>
+      <li><a href="2.html">CSS</a></li>
+      <li><a href="3.html">JavaScript</a></li>
+    </ol>
+    <h2>JavaScript</h2>
+    <p>
+      JavaScript (/'dʒa:vəˌskrIpt/[6]), often abbreviated as JS, is a high-level, dynamic, weakly typed, prototype-based, multi-paradigm, and interpreted programming language. Alongside HTML and CSS,
+      JavaScript is one of the three core technologies of World Wide Web content production. It is used to make webpages interactive and provide online programs, including video games. The majority of
+      websites employ it, and all modern web browsers support it without the need for plug-ins by means of a built-in JavaScript engine. Each of the many JavaScript engines represent a different
+      implementation of JavaScript, all based on the ECMAScript specification, with some engines not supporting the spec fully, and with many engines supporting additional features beyond ECMA.
+    </p>
+    <pre>es5d와 es6의 차이 이해 및 과거 버전에 이해 필요성
+      javaScript가 넷스케이프 커뮤니케이션즈로부터 개발되고 나서, MS에서 JScript를 개발하였다.
+      두 언어는 서로 호환되지 못하는 경우가 있어 크로스 브라우징 이슈가 발생하였다.
+      
+      크로스 브라우징 이슈
+      기능이 모든 브라우저에서 동일하게 동작하지 않는 이슈
+      
+       
+      
+      이 크로스 브라우징 이슈를 해결하기 위해 JavaScript를 표준화를 했다.
+      그게 바로 ECMAScript 이다.
+      (ECMAScript라고 불리는 이유는 비영리 표준화기구인 인터내셔널이 Javascript 표준화 요청을 했기 때문이다.)
+      
+      우리가 흔히 사용하는 ES5, ES6은 버전 숫자를 붙여 ECMAScript를 줄여쓰는 말이다.
+      참고로 2015년에 나온 것이 ES5이고 2016년에 나온 것이 ES6라고 착각할 수 있는데,
+      ES5는 2009년에 발표되었고 ES6는 2015년에 발표되었다.
+      es6+를 요구하는 사람들이 많다 그렇지만 과거버전을 알아야 하는 이유는 레거시 코드누군가 남기고 간 기존 코드)
+      를 최신 문법으로 리팩토링 할 수 있느냐 또는 코드의 동작을 해석해서 유지 보수할 수 있는가를 
+      묻는다고 볼 수 있다
+      
+      우리가 흔히 사용하는 ES5, ES6은 버전 숫자를 붙여 ECMAScript를 줄여쓰는 말이다.
+      참고로 2015년에 나온 것이 ES5이고 2016년에 나온 것이 ES6라고 착각할 수 있는데,
+      ES5는 2009년에 발표되었고 ES6는 2015년에 발표되었다.
+      
+      모든 회사가 최신 문법을 사용하진 않기 때문이며, 최신 문법을 사용하더라도 시간이 지나면
+      레거시 코드가 되기 때문에, es5, es6 구분이 필요한 이유는, 버전 차이에 따른 기능 추가가 뚜렷했기 떄문이다
+      es란, ECMAScript의 약어를 뜻하며 자바스크립트의 표준, 규격을 나타내는 용어이다
+      뒤에 숫자는 버전을 뜻하는데 ES5(2009) ES6(2015) 출시함
+      
+      버전별로 확인하다 보면 ES6 이후에는 매년 업데이트가 되고있는 반면, ES5와 ES6사이에는 시간 차이가 있는데
+      6년 동안 많은 기능들이 추가되었다
+      사람들은 ES6+(ES6 이후, 모던 자바스크립트라고 부름) 이상을 요구하고 있다
+      ES5에 비해서 ES6에 추가된 기능들을 나열해보며, 기존과 차이를 알아야 한다고 한다
+      
+      ES5와 ES6의 대표적인 차이점으로 아래 항목들을 들 수 있다.
+      
+      템플릿 리터럴
+      화살표 함수
+      this
+      변수선언
+      모듈
+      클래스
+      템플릿 리터럴
+      ES6부터 새롭게 등장한 템플릿 리터럴. 덕분에 문자열 표현이 훨씬 간단해졌다.
+      템플릿 리터럴이란 작은 따옴표나 큰 따옴표 대신 백틱(`)으로 문자열을 감싸 표현하는 기능을 말한다.
+      템플릿 리터럴을 사용하면 플레이스 홀더(${variable})를 사용하여 백틱 내부에 문자열과 함께 표현식을 넣을 수 있다.
+      
+       
+      
+      ES5
+      
+      copy javascript
+      var name = "현진";
+      var age = 25;
+      console.log("저의 이름은 " + name + "이고, 나이는 " + age + "살 입니다.");
+      ES6
+      
+      copy javascript
+      var name = "현진";
+      var age = 25;
+      console.log(`저의 이름은 ${name}이고, 나이는 ${age}살 입니다.`);
+      화살표 함수
+      ES6부터 새롭게 등장한 화살표 함수로 함수 선언법이 좀 더 간단해졌다.
+      
+       
+      
+      ES5
+      
+      함수 선언식
+      
+      copy javascript
+      function str(arg1, arg2) { console.log("용민"); }
+      생성자 함수(많이 사용하지 않음)
+      
+      copy php
+      var str = new Function("arg1", "arg2", "console.log('용민')");
+      함수 리터럴(익명 함수를 만들 때 사용)
+      
+      copy javascript
+      var str = function(arg1, arg2) { console.log("용민"); };
+      🚀 참고
+      여기서 익명 함수란 말 그대로 이름이 없는 함수를 뜻한다.
+      ex) var bar = function (a, b) {...};
+      반대로 기명 함수는 이름이 있는 함수이다.
+      ex) var bar = function funcName(a, b) {...}
+      
+       
+      
+      ES6
+      
+      copy coffeescript
+      var str = (arg1, arg2) => {
+        console.log("용민");
+      };
+      copy javascript
+      var str = arg1 => console.log(arg1);
+      화살표 함수에 인자(argument)가 하나밖에 없다면 괄호를 생략할 수 있다.
+      또한 한줄로 표현이 가능하다면 위와 같이 중괄호({})를 생략할 수 있다.
+      
+      copy swift
+      var str = func => ({ id: "31" });
+      화살표 함수가 객체를 반환한다면 위와같이 표현해줄 수 있다.
+      
+      this의 다른 동작
+      ES5
+      
+      ES5같은 경우 객체 내에 있는 메소드를 실행 시 this는 메소드가 선언된 해당 객체를 가리킨다.
+      하지만 객체 안에서 선언된 함수의 this는 해당 객체가 아닌 window를 바라보고 있기 때문에 함수 안에서 this.name, this.age 를 하여도 아무 값이 나오지 않는다.
+      
+      
+      이러한 경우 해결방안으로 innerInfo.call(this) 를 통해 this 를 바인딩 시켜주거나 this를 해당 변수에 담아서 var self = this 와 같은 방식으로 접근하면 사용하면 된다.
+      
+      copy javascript
+      var thisTest = {
+           name : "김현진",   
+           age : 25,
+           info : function() {
+                console.log(this)
+                console.log(this.name , this.age)
+      
+                function innerInfo() {
+                    console.log(this)
+                    return this.name + ":" + this.age
+                }
+                return innerInfo()
+           }
+      }
+      
+      // 실행결과 
+      // {name: "김현진", age: 25, info: ƒ}
+      // 김현진 25
+      // Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
+      // ":undefined"
+      ES6
+      
+      ES6에서의 this 는 자신을 둘러싸고 있는 this를 바라보기 때문에 따로 바인딩이나 변수에 담을 필요 없다.
+      
+      copy kotlin
+      let thisTest = {
+           name : "김현진",   
+           age : 25,
+           info() {
+                console.log(this)
+                console.log(this.name , this.age)
+      
+                innerInfo = () => {
+                    console.log(this)
+                    return this.name + ":" + this.age
+                }
+                return innerInfo()
+           }
+      }
+      
+      // 실행결과
+      // {name: "김현진", age: 25, info: ƒ}
+      // 김현진 25
+      // {name: "김현진", age: 25, info: ƒ}
+      // "김현진:25"
+      생성자 함수의 인스턴스의 경우, this는 인스턴스를 가리킨다.
+      
+      copy cs
+      function Obj(value) {
+        this.value = value;
+      }
+      var obj = new Obj(0);
+      console.log(obj.value); // 0
+      화살표 함수를 쓰면 함수가 선언된 스코프에 자동 바인딩이 된다.
+      
+      copy javascript
+      var obj = {
+        value: 10,
+      
+        // 메소드 호출
+        show: function () {
+          console.log(this.value); // 10
+      
+          // 함수 호출
+          function show_01 () {
+            console.log(this.value); // undefined
+          }
+          show_01();
+      
+          // 화살표 함수
+          function show_02 = () => {
+            console.log(this.value); // 10
+          }
+          show_02();
+        }
+      }
+      obj.show();
+      변수 선언
+      ES5
+      
+      ES5에선 var 밖에 존재하지 않았다. var 는 변수를 선언할 때 사용되는 키워드로,
+      재할당과 재선언에 굉장히 자유롭다.
+      
+      copy javascript
+      var x = 10;
+      x = 15;
+      console.log(x); //15
+      var x = 12;
+      console.log(x); //12
+      ES6
+      
+      ES6부터 let, const가 추가되었다.
+      
+      let은 한번 선언된 변수에 동일한 이름으로 선언할 수 없다.
+      하지만, 값은 재할당 할 수 있다.
+      
+      copy javascript
+      let x = 10;
+      x = 15;
+      console.log(x); //15
+      let x = 12; // Identifier 'x' has already been declared
+      const는 한번 초기화된 변수에 재할당/재선언할 수 없다.
+      
+      copy cpp
+      const x = 10;
+      console.log(x); // 10;
+      x = 15; // TypeError: Assignment to constant variable.
+      그리고, let, const는 블록 스코프 또는 Function 스코프 내부에 선언되면 해당 스코프 밖에서 안에 있는 변수를 참조할 수 없다.
+      
+      쉽게 설명하자면, 중괄호로 묶인 부분 내부에 선언된 let, const를 중괄호 외부에서 참조할 수 없다는 것이다.
+      
+      copy javascript
+      if (true) {
+        var i = 0;
+      }
+      console.log(i); // 0
+      if (true) {
+        let j = 10;
+      }
+      console.log(j); // ReferenceError
+      if (true) {
+        const k = 100;
+      }
+      console.log(k); // ReferenceError
+      밖에서 안에 있는 const, let은 참조할 수는 있다.
+      
+      copy cpp
+      const i = 5;
+      if (ture) {
+        console.log(i); // 5
+      }
+      var는 Function 스코프는 내부에 선언된 var를 외부에서 참조할 수 없지만
+      
+      블록 스코프에선 내부에 선언되어 있어도 외부에서 참조 가능하다.
+      
+      copy javascript
+      function f() {
+        var v = 5;
+      
+        console.log(v); // 5
+      }
+      
+      console.log(v); // ReferenceError: v is not defined
+      
+      if (true) { 
+          var i = 0;
+      }
+      
+      console.log(i); // 0
+      정리하자면 다음과 같다.
+      
+      표1
+      
+      모듈
+      ES5 이전에는 각 기능별로 JS 파일을 나누고 개발 및 관리하는 것이 불가능했다.
+      
+       
+      
+      ES5
+      
+      ES5 에선 require 를 통해 모듈화를 할 수 있었다.
+      
+      예를 들어 아래와 같은 구조인 경우,
+      
+      copy lua
+      js / - - -script.js
+            |
+            ---  slider.js
+      copy xml
+      <script>
+        src = "slider.js";
+      </script>
+      <script>
+        src = "script.js";
+      </script>
+      index.html
+      
+      copy javascript
+      var slider = require(./slider.js)
+      // 혹은 require(./slider)
+      script.js
+      
+       
+      
+      위와 같이 함으로써, slider.js를 임포트할 수 있었다. 이러한 방법으로 파일 자체를 사용할 수 있다.
+      
+       
+      
+      ES6
+      
+      ES6 부터는 import/export 로 모듈을 관리할 수 있다.
+      모듈은 실현가능한 특정 프로그램의 그룹니다.
+      그리고 이것은 다른 파일의 변수, 함수를 참조한다.
+      클래스와 같은 모듈이 로딩될 때, import와 export를 이용해 사용될 수 있다.
+      
+       
+      
+      하나의 모듈만 공유할 때
+      
+      로드 모듈
+      
+      copy coffeescript
+      import 'import to loadname' from '파일 경로'
+      아웃풋 모듈
+      
+      copy coffeescript
+      export default 'module'
+      copy coffeescript
+      import Carousel from "./carousel";
+      cosnt carousel = new Carousel();
+      script.js
+      
+      copy javascript
+      export default class Carousel {
+          constructor() {
+              this.calc();
+          }
+          calc() {
+              console.log(10);
+          }
+      }
+      carousel.js
+      
+       
+      
+      여러 모듈을 사용할 때
+      
+      아웃풋 관점에서, export는 사용하고 싶은 곳에 붙이고, import는 다음과 같이 사용하면 된다.
+      
+      copy coffeescript
+      import {a1, a2, ...} from '파일 경로'}
+      copy javascript
+      import { multi, SuperMulti } from "./Multiplay";
+      console.log(multi(5)); // 50
+      console.log(SuperMulti(6)); // 600
+      script.js
+      
+      copy javascript
+      export const i = 10;
+      
+      export function multi(x) {
+        return i * x;
+      }
+      
+      export function superMulti(x) {
+        return i * x * 10;
+      }
+      만약 모등 모듈을 전달받기 위해서는 import를 아래와 같이 작성하면 된다.
+      
+      copy kotlin
+      import * as ‘object name’ form ‘파일 경로’
+      copy javascript
+      import * as lib from "./multiply";
+      console.log(lib.multi(5)); // 50
+      클래스
+      ES5
+      
+      ES5에선 class라는 키워드는 없었지만 프로토타입을 통해 실현 가능했다.
+      
+      copy javascript
+      var Add = function(arg1, arg2) {
+        this.arg1 = arg1;
+        this.arg2 = arg2;
+      };
+      
+      Add.prototype.calc = function() {
+        return this.arg1 + "+" + this.arg2 + "=" + (this.arg1 + this.arg2);
+      };
+      
+      var num = new Add(5, 8);
+      console.log(num.calc()); // 5 + 8 = 13
+      ES6
+      
+      ES6에서는 class 키워드를 사용해서 선언할 수 있다.
+      
+      copy kotlin
+      class Add {
+        constructor(arg1, arg2) {
+          this.arg1 = arg1;
+          this.arg2 = arg2;
+        }
+        calc() {
+          return this.arg1 + "+" + this.arg2 + "=" + (this.arg1 + this.arg2);
+        }
+      }
+      
+      var num = new Add(5, 8);
+      console.log(num.calc()); // 5 + 8 = 13
+      클래스 상속
+      클래스의 상속과 오버라이딩은 super를 사용해서 수행할 수 있다.
+      
+       
+      
+      ES5
+      
+      copy javascript
+      var AddSquare = function(arg1, arg2) {
+        Add.call(this, arg1, arg2);
+      };
+      
+      Object.assign(AddSquare.prototype, Add.prototype);
+      
+      AddSquare.prototype = {
+        calc: function() {
+          // 메소드는 생략될 수 없습니다.
+          Add.prototype.calc.call(this);
+        },
+        calcSquare: function() {
+          this.pow = Math.pow(this.arg1 + this.arg2, 2);
+          return "(" + this.arg1 + "+" + this.arg2 + ")^2=" + this.pow;
+        }
+      };
+      
+      var numSquare = new AddSquare(5, 8);
+      console.log(numSquare.calc()); // 5 + 8 = 13
+      console.log(numSquare.calcSquare()); // (5 + 8) ^ 2 =169
+      ES6
+      
+      copy scala
+      class AddSquare extends Add {
+        constructor(arg1, arg2) {
+          super(arg1, arg2);
+        }
+        calc() {
+          super.calc();
+        }
+        calcSquare() {
+          this.pow = Math.pow(this.arg1 + this.arg2, 2);
+          return "(" + this.arg1 + "+" + this.arg2 + ") ^ 2 =" + this.pow;
+        }
+      }
+      
+      var numSquare = new AddSquare(5, 8);
+      console.log(numSquare.calc()); // 5 + 8 = 13
+      console.log(numSquare.calcSquare()); // (5 + 8) ^ 2 = 169</pre>
+  </body>
 </html>
